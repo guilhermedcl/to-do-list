@@ -45,8 +45,10 @@ export default function SimpleSnackbar() {
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
-        message="Cloque na nota, digite e insira um título caso necessário e adicione usa anotação em nosso mural."
+        message="Clique na nota, digite o texto e, se necessário, insira um título. Depois, adicione sua anotação em nosso mural."
         action={action}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        style={{ marginTop: '100px' }}
       />
     </header>
   );
