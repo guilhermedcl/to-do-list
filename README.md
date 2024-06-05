@@ -32,3 +32,34 @@ Ainda não temos requisitos específicos para o Back-end.
 - **Back-end:** Node.js com Express.js
 - **Banco de Dados:** MongoDB utilizando Mongoose.
 
+## Como Rodar a Aplicação
+
+### Instalação
+1. Clone o repositório para a sua máquina:
+   ```sh
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   ```
+
+2. Navegue até o diretório do projeto:
+   ```sh
+   cd to-do-list
+   ```
+
+3. Instale as dependências:
+   ```sh
+   npm install
+   ```
+
+### Rodando a Aplicação
+1. Inicie o back-end...
+Primeiro, certifique-se de que o seu back-end está rodando. Abra um terminal, navegue até o diretório do seu back-end e inicie o servidor:
+   ```sh
+   node Server.js
+   ```
+2. Inicie o front-end...
+Abra outro terminal, navegue até o diretório do seu front-end e inicie o servidor do React:
+   ```sh
+   npm start
+   ```
+
+2. Seu navegador abrirá o link: [http://localhost:3000](http://localhost:3000) com a aplicação rodando.
