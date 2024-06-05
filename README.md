@@ -62,4 +62,4 @@ Abra outro terminal, navegue até o diretório do seu front-end e inicie o servi
    npm start
    ```
 
-2. Seu navegador abrirá o link: [http://localhost:3000](http://localhost:3000) com a aplicação rodando.
+2. Seu navegador abrirá o link: [http://localhost:3001](http://localhost:3001) com a aplicação rodando.
