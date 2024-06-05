@@ -1,10 +1,10 @@
-import * as React from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function SimpleSnackbar() {
+export default function Header() {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -21,9 +21,6 @@ export default function SimpleSnackbar() {
 
   const action = (
     <React.Fragment>
-      <Button color="primary" size="small" onClick={handleClose}>
-        DESFAZER
-      </Button>
       <IconButton
         size="small"
         aria-label="close"
@@ -38,14 +35,17 @@ export default function SimpleSnackbar() {
   return (
     <header>
       <h1>Minhas Notas!</h1>
-      <Button color="inherit" onClick={handleClick}>
-       - Instruções de uso -
+      <Button
+        style={{ backgroundColor: "#ff0000", color: "#ffffff" }}
+        onClick={handleClick}
+      >
+        ! Instruções de uso !
       </Button>
       <Snackbar
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
-        message="Clique na nota, digite o texto e, se necessário, insira um título. Depois, adicione sua anotação em nosso mural."
+        message="Clique na nota, digite o texto e salve-a. Você também tem a opção de editá-la ou removê-la caso queira."
         action={action}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         style={{ marginTop: '100px' }}

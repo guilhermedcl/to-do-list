@@ -5,30 +5,29 @@ import Zoom from "@mui/material/Zoom";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
-
-  const [note, setNote] = useState({
-    title: "",
-    content: "",
-  });
+  const [note, setNote] = useState({ text: "" });
 
   function handleChange(event) {
-    const { name, value } = event.target;
-
-    setNote((prevNote) => {
-      return {
-        ...prevNote,
-        [name]: value,
-      };
-    });
+    const { value } = event.target;
+    setNote({ text: value });
   }
 
   function submitNote(event) {
-    props.onAdd(note);
-    setNote({
-      title: "",
-      content: "",
-    });
     event.preventDefault();
+
+    fetch("http://localhost:3000/save", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(note),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        props.onAdd(data);
+        setNote({ text: "" }); // Limpa o estado após a adição da nota
+      })
+      .catch((error) => console.error("Erro:", error));
   }
 
   function expand() {
@@ -38,20 +37,11 @@ function CreateArea(props) {
   return (
     <div>
       <form className="create-note">
-        {isExpanded && (
-          <input
-            name="title"
-            onChange={handleChange}
-            value={note.title}
-            placeholder="Título"
-          />
-        )}
-
         <textarea
-          name="content"
+          name="text"
           onClick={expand}
           onChange={handleChange}
-          value={note.content}
+          value={note.text}
           placeholder="Digite uma nota..."
           rows={isExpanded ? 3 : 1}
         />
