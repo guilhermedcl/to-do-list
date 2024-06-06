@@ -3,9 +3,10 @@ const { getToDo, saveToDo, updateToDo, deleteToDo } = require("../controllers/To
 
 const router = Router();
 
+// definindo as rotas
 router.get('/', getToDo);
 router.post('/save', saveToDo);
-router.put('/update/:id', updateToDo); // Definir a rota PUT para a atualização com o ID na URL
-router.delete('/delete/:id', deleteToDo); // Definir a rota DELETE com o ID na URL
+router.put('/update/:id', updateToDo);
+router.delete('/delete/:id', deleteToDo);
 
 module.exports = router;

@@ -10,14 +10,19 @@ require('dotenv').config()
 const app = express()
 const PORT = process.env.port || 3000
 
+// middleware para parsear json
 app.use(express.json());
-app.use(cors())
+// middleware para habilitar cors
+app.use(cors());
 
+// conecta ao banco de dados mongodb
 mongoose
 .connect(process.env.MONGODB_URL)
 .then(()=> console.log('Conectado ao MongoDB...'))
 .catch((err)=>console.log(err))
 
+// usa as rotas definidas
 app.use(routes)
 
-app.listen(PORT, () => console.log(`Listening on: ${PORT}`))
+// inicia o servidor na porta definida
+app.listen(PORT, () => console.log(`Aplicação rodando na porta: ${PORT}`))
