@@ -24,7 +24,18 @@ O front-end é executado do lado do cliente e é desenvolvido utilizando React.j
 
 ### Back-end
 
-Ainda não temos requisitos específicos para o Back-end.
+#### Tecnologias:
+- Node.js + Express + JavaScript + (módulos necessários para a aplicação)
+#### Requisitos
+- Criar API RESTful que ofereça os serviços necessários para que o Front-End possa consultar,
+criar, alterar e remover os dados do banco de dados
+- A aplicação deverá interagir com algum banco de dados NoSQL
+- Desenvolver o tratamento de exceções para lidar com os possíveis erros que podem ocorrer
+durante a execução
+- Configurar a análise de código estático com Jest
+- Gerar o relatório de cobertura de testes com Jest
+- Implementar 100% de cobertura de testes unitários - partes de código sem teste deverão ser
+justificadas
 
 ## Tecnologias Utilizadas
 
@@ -54,7 +65,7 @@ Ainda não temos requisitos específicos para o Back-end.
 1. Inicie o back-end...
 Primeiro, certifique-se de que o seu back-end está rodando. Abra um terminal, navegue até o diretório do seu back-end e inicie o servidor:
    ```sh
-   node Server.js
+   node src/Server.js
    ```
 2. Inicie o front-end...
 Abra outro terminal, navegue até o diretório do seu front-end e inicie o servidor do React:
@@ -62,4 +73,7 @@ Abra outro terminal, navegue até o diretório do seu front-end e inicie o servi
    npm start
    ```
 
-2. Seu navegador abrirá o link: [http://localhost:3001](http://localhost:3001) com a aplicação rodando.
+3. Seu navegador abrirá o link: [http://localhost:3001](http://localhost:3001) com a aplicação rodando.
+
+### IMPORTANTE:
+1. Inicie sempre o backend antes que o frontend, e aceite a mensagem para que o front abra na porta 3001
