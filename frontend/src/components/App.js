@@ -11,10 +11,10 @@ function App() {
     fetch("http://localhost:3000/")
       .then((response) => response.json())
       .then((data) => {
-        console.log("Data received from backend:", data);
+        console.log("Dados recebidos do backend:", data);
         setNotes(data);
       })
-      .catch((error) => console.error("Error fetching notes:", error));
+      .catch((error) => console.error("Erro ao buscar as notas:", error));
   }, []);
 
   function addNote(newNote) {

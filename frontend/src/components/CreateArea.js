@@ -15,24 +15,35 @@ function CreateArea(props) {
   function submitNote(event) {
     event.preventDefault();
 
-    fetch("http://localhost:3000/save", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(note),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        props.onAdd(data);
-        setNote({ text: "" }); // Limpa o estado após a adição da nota
-      })
-      .catch((error) => console.error("Erro:", error));
-  }
+    // Verifica se o texto da nota não está vazio
+    if (!note.text.trim()) {
+        console.error("O texto da nota não pode estar vazio");
+        return;
+    }
 
-  function expand() {
-    setExpanded(true);
-  }
+    fetch("http://localhost:3000/save", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(note),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Erro ao criar a nota");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            props.onAdd(data);
+            setNote({ text: "" }); // Limpa o estado após a adição da nota
+        })
+        .catch((error) => console.error("Erro ao criar a nota:", error));
+}
+function expand() {
+  setExpanded(true);
+}
+
 
   return (
     <div>
