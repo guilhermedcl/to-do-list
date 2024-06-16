@@ -62,18 +62,10 @@ justificadas
    ```
 
 ### Rodando a Aplicação
-1. Inicie o back-end...
-Primeiro, certifique-se de que o seu back-end está rodando. Abra um terminal, navegue até o diretório do seu back-end e inicie o servidor:
-   ```sh
-   node src/Server.js
-   ```
-2. Inicie o front-end...
-Abra outro terminal, navegue até o diretório do seu front-end e inicie o servidor do React:
+1. Inicie a aplicação com o comando abaixo na raiz do projeto:
    ```sh
    npm start
    ```
 
-3. Seu navegador abrirá o link: [http://localhost:3001](http://localhost:3001) com a aplicação rodando.
+2. Seu navegador abrirá o link: [http://localhost:3001](http://localhost:3001) com a aplicação rodando.
 
-### IMPORTANTE:
-1. Inicie sempre o backend antes que o frontend, e aceite a mensagem para que o front abra na porta 3001
