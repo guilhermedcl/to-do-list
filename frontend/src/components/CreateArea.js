@@ -7,17 +7,19 @@ function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
   const [note, setNote] = useState({ text: "" });
 
+  // função para atualizar o estado da nota conforme o usuário digita
   function handleChange(event) {
     const { value } = event.target;
     setNote({ text: value });
   }
 
+  // função para enviar a nota para o backend ao clicar no botão de adicionar
   function submitNote(event) {
     event.preventDefault();
 
     // Verifica se o texto da nota não está vazio
     if (!note.text.trim()) {
-        console.error("O texto da nota não pode estar vazio");
+        console.error("o texto da nota não pode estar vazio");
         return;
     }
 
@@ -30,7 +32,7 @@ function CreateArea(props) {
     })
         .then((response) => {
             if (!response.ok) {
-                throw new Error("Erro ao criar a nota");
+                throw new Error("erro ao criar a nota");
             }
             return response.json();
         })
@@ -38,8 +40,10 @@ function CreateArea(props) {
             props.onAdd(data);
             setNote({ text: "" }); // Limpa o estado após a adição da nota
         })
-        .catch((error) => console.error("Erro ao criar a nota:", error));
+        .catch((error) => console.error("erro ao criar a nota:", error));
 }
+
+// função para expandir a área de texto ao clicar nela
 function expand() {
   setExpanded(true);
 }
@@ -53,8 +57,8 @@ function expand() {
           onClick={expand}
           onChange={handleChange}
           value={note.text}
-          placeholder="Digite uma nota..."
-          rows={isExpanded ? 3 : 1}
+          placeholder="digite uma nota..."
+          rows={isExpanded ? 3 : 1} // número de linhas depende se está expandido ou não
         />
         <Zoom in={isExpanded}>
           <Fab onClick={submitNote}>
