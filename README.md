@@ -69,3 +69,16 @@ justificadas
 
 2. Seu navegador abrirá o link: [http://localhost:3001](http://localhost:3001) com a aplicação rodando.
 
+## Como Rodar os Testes
+1. Já dentro da raiz do projeto, navegue até a pasta do backend:
+   ```sh
+   cd backend
+   ```
+
+2. Inicie os testes com o seguinte comando:
+    ```sh
+   npm test
+   ```
+
+3. Abra a pasta --> backend/coverage/Icov-report/index.html nela abrirá o navegador web mostrando todo o relatório dos testes realizados.
+
