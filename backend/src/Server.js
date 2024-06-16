@@ -18,8 +18,6 @@ app.use(cors());
 // conecta ao banco de dados mongodb
 mongoose
 .connect(process.env.MONGODB_URL)
-.then(()=> console.log('Conectado ao MongoDB...'))
-.catch((err)=>console.log(err))
 
 // usa as rotas definidas
 app.use(routes)
