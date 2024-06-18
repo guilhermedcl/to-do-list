@@ -23,7 +23,7 @@ function CreateArea(props) {
         return;
     }
 
-    fetch("http://localhost:3000/save", {
+    fetch("http://localhost:7000/api/save", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
