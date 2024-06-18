@@ -170,6 +170,92 @@ form.create-note button:hover {
   transition: ease-in 0.3s;
 }
 
+.instrucoesButton {
+  -webkit-tap-highlight-color: transparent;
+  background-color: #252525;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+.instrucoesButton:disabled {
+  cursor: default;
+}
+.instrucoesButton:-moz-focusring {
+  outline: auto;
+}
+.instrucoesButton svg {
+  display: block;
+}
+.instrucoesButton [hidden] {
+  display: none;
+}
+.instrucoesButton {
+  border-radius: 99rem;
+  border: 3px solid #ffffff; 
+  overflow: hidden;
+  padding: 0.8rem 3rem;
+  position: relative;
+}
+.instrucoesButton span {
+  display: grid;
+  inset: 0;
+  place-items: center;
+  position: absolute;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+.instrucoesButton .marquee {
+  --spacing: 10em;
+  --start: 0em;
+  --end: calc(1 * var(--spacing));
+  -webkit-animation: marquee 1s linear infinite;
+  animation: marquee 1s linear infinite;
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+  opacity: 0;
+  position: relative;
+  text-shadow: #fff var(--spacing) 0, #fff calc(var(--spacing) * -1) 0,
+    #fff calc(var(--spacing) * -2) 0;
+}
+.instrucoesButton:hover .marquee {
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
+  opacity: 1;
+}
+.instrucoesButton:hover .text {
+  opacity: 0;
+}
+
+@-webkit-keyframes marquee {
+  0% {
+    -webkit-transform: translateX(var(--start));
+            transform: translateX(var(--start));
+  }
+  to {
+    -webkit-transform: translateX(var(--end));
+            transform: translateX(var(--end));
+  }
+}
+@keyframes marquee {
+  0% {
+    -webkit-transform: translateX(var(--start));
+            transform: translateX(var(--start));
+  }
+  to {
+    -webkit-transform: translateX(var(--end));
+            transform: translateX(var(--end));
+  }
+}
+
 .edit-input {
   width: calc(100% - 20px);
   border: none;
