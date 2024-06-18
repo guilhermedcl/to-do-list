@@ -13,6 +13,7 @@ app.use(express.json());
 // middleware para habilitar cors
 app.use(cors());
 
+// conecta ao banco de dados mongodb
 mongoose.connect(process.env.MONGODB_URL);
 
 // usa as rotas definidas
