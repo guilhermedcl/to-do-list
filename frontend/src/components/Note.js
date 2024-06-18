@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Cancel";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -43,19 +44,19 @@ function Note(props) {
       <div className="icons">
         {isEditing ? ( // renderizar os botões de salvar e cancelar se estiver em modo de edição
           <>
-            <button onClick={handleSaveClick}>
-              <AddIcon /> {/* ícone de salvar */}
+            <button className="save-button" onClick={handleSaveClick}>
+              <SaveIcon /> {/* ícone de salvar */}
             </button>
-            <button onClick={handleCancelClick}>
-              <DeleteIcon /> {/* ícone de cancelar */}
+            <button className="cancel-button" onClick={handleCancelClick}>
+              <CancelIcon /> {/* ícone de cancelar */}
             </button>
           </>
         ) : ( // renderizar os botões de editar e deletar se não estiver em modo de edição
           <>
-            <button onClick={handleEditClick}>
+            <button className="edit-button" onClick={handleEditClick}>
               <EditIcon /> {/* ícone de editar */}
             </button>
-            <button onClick={() => props.onDelete(props.id)}>
+            <button className="delete-button" onClick={() => props.onDelete(props.id)}>
               <DeleteIcon /> {/* ícone de deletar */}
             </button>
           </>

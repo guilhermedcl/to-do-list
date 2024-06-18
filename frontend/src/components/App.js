@@ -9,7 +9,7 @@ function App() {
 
   // useEffect para buscar as notas do backend ao montar o componente
   useEffect(() => {
-    fetch("http://localhost:3000/")
+    fetch("http://localhost:7000/api")
       .then((response) => response.json())
       .then((data) => {
         console.log("dados recebidos do backend:", data);
@@ -25,7 +25,7 @@ function App() {
 
   // função para excluir uma nota pelo id
   function deleteNote(id) {
-    fetch(`http://localhost:3000/delete/${id}`, {
+    fetch(`http://localhost:7000/api/delete/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -42,7 +42,7 @@ function App() {
 
   // função para editar uma nota pelo id e novo texto
   function editNote(id, newText) {
-    fetch(`http://localhost:3000/update/${id}`, {
+    fetch(`http://localhost:7000/api/update/${id}`, {
         method: "PUT", // usar método PUT para editar a nota
         headers: {
             "Content-Type": "application/json",

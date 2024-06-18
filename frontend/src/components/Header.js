@@ -34,7 +34,7 @@ export default function Header() {
 
   return (
     <header>
-      <h1>minhas notas!</h1> {/* título principal */}
+      <h1>Suas Anotações</h1> {/* título principal */}
       <Button
         style={{ backgroundColor: "#ff0000", color: "#ffffff" }} // estilo do botão
         onClick={handleClick} // função para lidar com o clique no botão
@@ -43,7 +43,7 @@ export default function Header() {
       </Button>
       <Snackbar
         open={open} // estado que controla se o Snackbar está aberto ou fechado
-        autoHideDuration={6000} // duração automática de exibição do Snackbar
+        autoHideDuration={5000} // duração automática de exibição do Snackbar
         onClose={handleClose} // função para lidar com o fechamento do Snackbar
         message="Clique na nota, digite o texto e salve-a. Você também tem a opção de editá-la ou removê-la caso queira." // mensagem exibida no Snackbar
         action={action} // ação exibida no Snackbar (ícone de fechar)
