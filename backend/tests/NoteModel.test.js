@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const NoteModel = require('../src/models/NoteModel'); 
-dotenv.config();
+const NoteModel = require('../models/NoteModel'); // importa o modelo Note
 
 describe('Notemodel', () => {
   beforeAll(async () => {
     // conecta ao banco de dados antes dos testes
-    await mongoose.connect(process.env.MONGODB_URL);
+    await mongoose.connect(process.env.mongodb_url_test, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+    });
   });
 
   afterAll(async () => {
