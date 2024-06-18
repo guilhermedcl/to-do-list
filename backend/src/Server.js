@@ -1,14 +1,12 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require("cors")
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require("cors");
+const routes = require('../src/routes/NoteRoute');
 
+require('dotenv').config();
 
-const routes = require('./routes/NoteRoute')
-
-require('dotenv').config()
-
-const app = express()
-const PORT = process.env.port || 3000
+const app = express();
+const PORT = process.env.PORT || 7000; 
 
 // middleware para parsear json
 app.use(express.json());
@@ -16,12 +14,10 @@ app.use(express.json());
 app.use(cors());
 
 // conecta ao banco de dados mongodb
-mongoose
-.connect(process.env.MONGODB_URL)
-
+mongoose.connect(process.env.MONGODB_URL);
 
 // usa as rotas definidas
-app.use(routes)
+app.use('/api', routes); // Adicionando '/api' para evitar conflito com o frontend
 
 // inicia o servidor na porta definida
-app.listen(PORT, () => console.log(`Aplicação rodando na porta: ${PORT}`))
+app.listen(PORT, () => console.log(`Aplicação rodando na porta: ${PORT}`));
