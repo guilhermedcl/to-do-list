@@ -34,6 +34,7 @@ function Note(props) {
           value={content}
           onChange={handleInputChange}
           autoFocus // foco automático no input ao entrar no modo de edição
+          className="edit-input" 
         />
       ) : (
         <>
