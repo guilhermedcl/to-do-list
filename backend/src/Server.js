@@ -20,4 +20,4 @@ mongoose.connect(process.env.MONGODB_URL);
 app.use('/api', routes); // Adicionando '/api' para evitar conflito com o frontend
 
 // inicia o servidor na porta definida
-app.listen(PORT, () => console.log(`Aplicação rodando na porta: ${PORT}`));
+app.listen(PORT);
