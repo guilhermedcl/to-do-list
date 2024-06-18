@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const routes = require('./routes/todoRoute'); // importa as rotas do ToDo
+const routes = require('./routes/NoteRoute'); // importa as rotas do Note
 const app = express();
 
 // carrega as variáveis de ambiente

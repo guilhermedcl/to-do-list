@@ -1,11 +1,11 @@
-const ToDoModel = require('../models/ToDoModel');
+const NoteModel = require('../models/NoteModel');
 
 // pega todas as notas do banco de dados
-module.exports.getToDo = async (req, res) => {
+module.exports.getNote = async (req, res) => {
     try {
-        const toDo = await ToDoModel.find().maxTimeMS(10000); // Aumenta o tempo limite para 10 segundos (10000 milissegundos)
-        console.log("Notas do banco de dados:", toDo);
-        res.json(toDo);
+        const Note = await NoteModel.find().maxTimeMS(10000); // Aumenta o tempo limite para 10 segundos (10000 milissegundos)
+        console.log("Notas do banco de dados:", Note);
+        res.json(Note);
     } catch (error) {
         console.error("Erro ao buscar notas:", error);
         res.status(500).send("Erro interno do servidor");
@@ -13,7 +13,7 @@ module.exports.getToDo = async (req, res) => {
 };
 
 // salva uma nova nota no banco de dados
-module.exports.saveToDo = async (req, res) => {
+module.exports.saveNote = async (req, res) => {
     const { text } = req.body;
 
     // verifica se o texto foi enviado
@@ -22,9 +22,9 @@ module.exports.saveToDo = async (req, res) => {
     }
 
     try {
-        const newToDo = await ToDoModel.create({ text });
-        console.log("Adicionado com sucesso...", newToDo); // loga a nota adicionada no console
-        res.status(201).json(newToDo); // envia a nova nota como resposta
+        const newNote = await NoteModel.create({ text });
+        console.log("Adicionado com sucesso...", newNote); // loga a nota adicionada no console
+        res.status(201).json(newNote); // envia a nova nota como resposta
     } catch (error) {
         console.error("Erro ao adicionar nota:", error); // loga o erro no console
         res.status(400).json({ error: "Erro ao adicionar nota. Certifique-se de enviar os dados no formato correto." }); // envia uma resposta de erro
@@ -32,7 +32,7 @@ module.exports.saveToDo = async (req, res) => {
 };
 
 // atualiza uma nota existente no banco de dados
-module.exports.updateToDo = async (req, res) => {
+module.exports.updateNote = async (req, res) => {
     const { id } = req.params; // pega o id da nota da URL
     const { text } = req.body; // pega o novo texto do corpo da requisição
 
@@ -43,11 +43,11 @@ module.exports.updateToDo = async (req, res) => {
 
     try {
         // atualiza a nota no banco de dados
-        const updatedToDo = await ToDoModel.findByIdAndUpdate(id, { text }, { new: true });
-        if (!updatedToDo) {
+        const updatedNote = await NoteModel.findByIdAndUpdate(id, { text }, { new: true });
+        if (!updatedNote) {
             return res.status(404).json({ error: "Nota não encontrada" }); // envia uma resposta de erro se a nota não for encontrada
         }
-        res.json(updatedToDo); // envia a nota atualizada como resposta
+        res.json(updatedNote); // envia a nota atualizada como resposta
     } catch (error) {
         console.error("Erro ao atualizar nota:", error); // loga o erro no console
         res.status(500).send("Erro interno do servidor"); // envia uma resposta de erro
@@ -55,7 +55,7 @@ module.exports.updateToDo = async (req, res) => {
 };
 
 // deleta uma nota do banco de dados
-module.exports.deleteToDo = async (req, res) => {
+module.exports.deleteNote = async (req, res) => {
     const { id } = req.params; // pega o id da nota da URL
 
     // verifica se o id foi enviado
@@ -64,8 +64,8 @@ module.exports.deleteToDo = async (req, res) => {
     }
 
     try {
-        const deletedToDo = await ToDoModel.findByIdAndDelete(id);
-        if (!deletedToDo) {
+        const deletedNote = await NoteModel.findByIdAndDelete(id);
+        if (!deletedNote) {
             return res.status(404).json({ error: "Nota não encontrada" }); // envia uma resposta de erro se a nota não for encontrada
         }
         res.status(200).json({ message: "Nota excluída com sucesso" }); // envia uma mensagem de sucesso
