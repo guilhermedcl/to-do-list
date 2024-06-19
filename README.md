@@ -38,10 +38,7 @@ durante a execução
 justificadas
 
 ## Tecnologias Utilizadas
-
-- **Front-end:** React.js
-- **Back-end:** Node.js com Express.js
-- **Banco de Dados:** MongoDB utilizando Mongoose.
+<img src="https://skillicons.dev/icons?i=html,css,javascript,nodejs,express,jest,mongodb,git,npm,postman,vscode" /><br>
 
 ## Como Rodar a Aplicação
 
@@ -56,9 +53,9 @@ justificadas
    cd to-do-list
    ```
 
-3. Instale as dependências:
+3. Instale as dependências com o comando abaixo na raiz do projeto:
    ```sh
-   npm install
+   npm run install-all
    ```
 
 ### Rodando a Aplicação
@@ -80,5 +77,5 @@ justificadas
    npm test
    ```
 
-3. Abra a pasta --> backend/coverage/Icov-report/index.html nela abrirá o navegador web mostrando todo o relatório dos testes realizados.
+3. Abra a pasta --> backend/coverage/Icov-report/index.html nela abrirá o navegador web mostrando todo o relatório dos testes realizados, também verifique seu terminal.
 
