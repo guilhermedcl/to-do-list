@@ -45,7 +45,7 @@ justificadas
 ### Instalação
 1. Clone o repositório para a sua máquina:
    ```sh
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/guilhermedcl/to-do-list.git
    ```
 
 2. Navegue até o diretório do projeto:
