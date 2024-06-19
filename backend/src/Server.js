@@ -2,9 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require("cors");
 const routes = require('../src/routes/NoteRoute');
-
 require('dotenv').config();
-
 const app = express();
 const PORT = process.env.PORT || 7000; 
 
@@ -21,3 +19,5 @@ app.use('/api', routes); // Adicionando '/api' para evitar conflito com o fronte
 
 // inicia o servidor na porta definida
 app.listen(PORT);
+
+module.exports = app;

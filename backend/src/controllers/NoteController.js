@@ -1,76 +1,46 @@
 const NoteModel = require('../models/NoteModel');
 
-// pega todas as notas do banco de dados
-module.exports.getNote = async (req, res) => {
+// Controlador para buscar todas as notas
+exports.getNote = async (req, res) => {
     try {
-        const Note = await NoteModel.find().maxTimeMS(10000); // Aumenta o tempo limite para 10 segundos (10000 milissegundos)
-        console.log("Notas do banco de dados:", Note);
-        res.json(Note);
+        const notes = await NoteModel.find();
+        res.json(notes);
     } catch (error) {
         console.error("Erro ao buscar notas:", error);
         res.status(500).send("Erro interno do servidor");
     }
 };
 
-// salva uma nova nota no banco de dados
-module.exports.saveNote = async (req, res) => {
-    const { text } = req.body;
-
-    // verifica se o texto foi enviado
-    if (!text) {
-        return res.status(400).json({ error: "O texto é obrigatório" });
-    }
-
+// Controlador para adicionar uma nova nota
+exports.saveNote = async (req, res) => {
     try {
-        const newNote = await NoteModel.create({ text });
-        console.log("Adicionado com sucesso...", newNote); // loga a nota adicionada no console
-        res.status(201).json(newNote); // envia a nova nota como resposta
+        const newNote = new NoteModel(req.body);
+        await newNote.save();
+        res.status(201).json(newNote);
     } catch (error) {
-        console.error("Erro ao adicionar nota:", error); // loga o erro no console
-        res.status(400).json({ error: "Erro ao adicionar nota. Certifique-se de enviar os dados no formato correto." }); // envia uma resposta de erro
+        console.error("Erro ao adicionar nota:", error);
+        res.status(400).json({ error: "Erro ao adicionar nota. Certifique-se de enviar os dados no formato correto." });
     }
 };
 
-// atualiza uma nota existente no banco de dados
-module.exports.updateNote = async (req, res) => {
-    const { id } = req.params; // pega o id da nota da URL
-    const { text } = req.body; // pega o novo texto do corpo da requisição
-
-    // verifica se o id e o texto foram enviados
-    if (!id || !text) {
-        return res.status(400).json({ error: "ID e texto são obrigatórios" });
-    }
-
+// Controlador para atualizar uma nota
+exports.updateNote = async (req, res) => {
     try {
-        // atualiza a nota no banco de dados
-        const updatedNote = await NoteModel.findByIdAndUpdate(id, { text }, { new: true });
-        if (!updatedNote) {
-            return res.status(404).json({ error: "Nota não encontrada" }); // envia uma resposta de erro se a nota não for encontrada
-        }
-        res.json(updatedNote); // envia a nota atualizada como resposta
+        const updatedNote = await NoteModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json(updatedNote);
     } catch (error) {
-        console.error("Erro ao atualizar nota:", error); // loga o erro no console
-        res.status(500).send("Erro interno do servidor"); // envia uma resposta de erro
+        console.error("Erro ao atualizar nota:", error);
+        res.status(500).send("Erro interno do servidor");
     }
 };
 
-// deleta uma nota do banco de dados
-module.exports.deleteNote = async (req, res) => {
-    const { id } = req.params; // pega o id da nota da URL
-
-    // verifica se o id foi enviado
-    if (!id) {
-        return res.status(400).json({ error: "ID é obrigatório" });
-    }
-
+// Controlador para excluir uma nota
+exports.deleteNote = async (req, res) => {
     try {
-        const deletedNote = await NoteModel.findByIdAndDelete(id);
-        if (!deletedNote) {
-            return res.status(404).json({ error: "Nota não encontrada" }); // envia uma resposta de erro se a nota não for encontrada
-        }
-        res.status(200).json({ message: "Nota excluída com sucesso" }); // envia uma mensagem de sucesso
+        await NoteModel.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: "Nota excluída com sucesso" });
     } catch (error) {
-        console.error("Erro ao excluir nota:", error); // loga o erro no console
-        res.status(500).json({ error: "Erro interno do servidor" }); // envia uma resposta de erro
+        console.error("Erro ao excluir nota:", error);
+        res.status(500).json({ error: "Erro interno do servidor" });
     }
 };
