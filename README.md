@@ -40,7 +40,7 @@ justificadas
 ## Tecnologias Utilizadas
 <img src="https://skillicons.dev/icons?i=html,css,javascript,nodejs,express,jest,mongodb,git,npm,postman,vscode" /><br>
 
-## Como Rodar a Aplicação
+# Como Rodar a Aplicação
 
 ### Instalação
 1. Clone o repositório para a sua máquina:
@@ -58,13 +58,22 @@ justificadas
    npm run install-all
    ```
 
+## Configurando variáveis de ambiente
+
+1. Renomeie o arquivo `.env.example` para `.env`.
+   
+2. Preencha a variável `MONGODB_URL` com sua própria URL de conexão
+
+3. Para pegar sua `MONGODB_URL`, siga este passo: Abra o site do MONGODB -> entre em sua conta -> Database -> Connect -> Drivers > copie e cole sua string de conexão.
+
+
 ### Rodando a Aplicação
 1. Inicie a aplicação com o comando abaixo na raiz do projeto:
    ```sh
    npm start
    ```
 
-2. Seu navegador abrirá o link: [http://localhost:3001](http://localhost:3001) com a aplicação rodando.
+2. Seu navegador abrirá o link: [http://localhost:3000](http://localhost:3000) com a aplicação rodando.
 
 ## Como Rodar os Testes
 1. Já dentro da raiz do projeto, navegue até a pasta do backend:
@@ -77,5 +86,5 @@ justificadas
    npm test
    ```
 
-3. Abra a pasta --> backend/coverage/Icov-report/index.html nela abrirá o navegador web mostrando todo o relatório dos testes realizados, também verifique seu terminal.
+3. Na estrutura do projeto, abra a pasta --> backend/coverage/Icov-report/index.html nela abrirá o navegador web mostrando todo o relatório dos testes realizados, também verifique seu terminal.
 
