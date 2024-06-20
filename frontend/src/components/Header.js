@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <header>
-      <h1>Suas Anotações</h1>
+      <h1>-Suas Anotações-</h1>
       <button className="instrucoesButton" onClick={handleClick}>
         <span class="text">! Instruções de uso !</span>
         <span class="marquee">Clique para ler</span>  
