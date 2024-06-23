@@ -35,8 +35,8 @@ export default function Header() {
     <header>
       <h1>Suas Anotações</h1>
       <button className="instrucoesButton" onClick={handleClick}>
-        <span class="text">! Instruções de uso !</span>
-        <span class="marquee">Clique para ler</span>  
+        <span className="text">! Instruções de uso !</span>
+        <span className="marquee">Clique para ler</span>  
       </button>
       <Snackbar
         open={open}
