@@ -1,126 +1,181 @@
-// NoteController.test.js
 const NoteController = require('../src/controllers/NoteController');
 const NoteModel = require('../src/models/NoteModel');
 
+// Mock do modelo para evitar interações com o banco de dados real
 jest.mock('../src/models/NoteModel');
 
 describe('NoteController', () => {
-    let req;
-    let res;
 
-    beforeEach(() => {
-        req = {};
-        res = {
-            status: jest.fn().mockReturnThis(),
-            json: jest.fn(),
-            send: jest.fn()
-        };
+  // Antes de cada teste, limpa o mock do NoteModel
+  beforeEach(() => {
+    NoteModel.mockClear();
+  });
+
+  // Depois de cada teste, restaura o estado dos mocks
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  // Teste para o método saveNote
+  describe('saveNote', () => {
+    it('should save a new note', async () => {
+      const mockReqBody = { text: 'New note' };
+      const mockSavedNote = {
+        _id: 'mockId', // Simulando um ID gerado pelo MongoDB
+        text: mockReqBody.text // O texto da nota enviado na requisição
+      };
+
+      // Mock do método save que resolve com mockSavedNote
+      const saveMock = jest.fn().mockResolvedValue(mockSavedNote);
+
+      // Configuração do mock do NoteModel para retornar um objeto com o método save
+      NoteModel.mockImplementation(() => ({
+        ...mockSavedNote,
+        save: saveMock
+      }));
+
+      const req = { body: mockReqBody };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+
+      await NoteController.saveNote(req, res);
+
+      expect(saveMock).toHaveBeenCalled(); // Verifica se o método save foi chamado no mock do NoteModel
+      expect(res.status).toHaveBeenCalledWith(201); // Verifica se o status 201 (Created) foi enviado
+      expect(res.json).toHaveBeenCalledWith(expect.objectContaining(mockSavedNote)); // Verifica se mockSavedNote está contido na resposta
     });
 
-    afterEach(() => {
-        jest.clearAllMocks();
+    it('should handle errors in saveNote', async () => {
+      const errorMessage = 'Erro ao adicionar nota';
+
+      // Mock do método save que rejeita com um erro
+      const saveMock = jest.fn().mockRejectedValue(new Error(errorMessage));
+
+      // Configuração do mock do NoteModel para retornar um objeto com o método save
+      NoteModel.mockImplementation(() => ({
+        save: saveMock
+      }));
+
+      const req = { body: { text: 'New note' } };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+
+      await NoteController.saveNote(req, res);
+
+      expect(saveMock).toHaveBeenCalled(); // Verifica se o método save foi chamado no mock do NoteModel
+      expect(res.status).toHaveBeenCalledWith(400); // Verifica se o status 400 (Bad Request) foi enviado em caso de erro
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao adicionar nota. Certifique-se de enviar os dados no formato correto.' }); // Verifica a resposta de erro esperada
+    });
+  });
+  
+  // Teste para o método getNote
+  describe('getNote', () => {
+    it('should get all notes', async () => {
+      const mockNotes = [{ text: 'Note 1' }, { text: 'Note 2' }];
+      NoteModel.find.mockResolvedValue(mockNotes);
+
+      const req = {};
+      const res = {
+        json: jest.fn()
+      };
+
+      await NoteController.getNote(req, res);
+
+      expect(res.json).toHaveBeenCalledWith(mockNotes);
     });
 
-    describe('getNote', () => {
-        it('deve retornar todas as notas do banco de dados', async () => {
-            const notes = [{ _id: '1', title: 'Nota 1' }, { _id: '2', title: 'Nota 2' }];
-            NoteModel.find.mockResolvedValue(notes);
+    it('should handle errors in getNote', async () => {
+      const errorMessage = 'Erro ao buscar notas';
+      NoteModel.find.mockRejectedValue(new Error(errorMessage));
 
-            await NoteController.getNote(req, res);
+      const req = {};
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn()
+      };
 
-            expect(NoteModel.find).toHaveBeenCalled();
-            expect(res.json).toHaveBeenCalledWith(notes);
-        });
+      await NoteController.getNote(req, res);
 
-        it('deve lidar com erro de banco de dados e retornar status 500', async () => {
-            const error = new Error('Database error');
-            NoteModel.find.mockRejectedValue(error);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.send).toHaveBeenCalledWith('Erro interno do servidor');
+    });
+  });
 
-            await NoteController.getNote(req, res);
+  // Teste para o método updateNote
+  describe('updateNote', () => {
+    it('should update a note', async () => {
+      const updatedNote = { _id: 'someId', text: 'Updated note' };
+      NoteModel.findByIdAndUpdate.mockResolvedValue(updatedNote);
 
-            expect(NoteModel.find).toHaveBeenCalled();
-            expect(res.status).toHaveBeenCalledWith(500);
-            expect(res.send).toHaveBeenCalledWith('Erro interno do servidor');
-        });
+      const req = {
+        params: { id: 'someId' },
+        body: { text: 'Updated note' }
+      };
+      const res = {
+        json: jest.fn()
+      };
+
+      await NoteController.updateNote(req, res);
+
+      expect(res.json).toHaveBeenCalledWith(updatedNote);
     });
 
-    describe('saveNote', () => {
-        it('deve salvar uma nova nota e retornar status 201', async () => {
-            req.body = { title: 'Nova Nota' };
-            const newNote = { _id: '1', title: 'Nova Nota' }; // NoteModel mock retorna este objeto
-            NoteModel.mockImplementation(() => ({
-                save: jest.fn().mockResolvedValue(newNote)
-            }));
+    it('should handle errors in updateNote', async () => {
+      const errorMessage = 'Erro ao atualizar nota';
+      NoteModel.findByIdAndUpdate.mockRejectedValue(new Error(errorMessage));
 
-            await NoteController.saveNote(req, res);
+      const req = {
+        params: { id: 'someId' },
+        body: { text: 'Updated note' }
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn()
+      };
 
-            expect(res.status).toHaveBeenCalledWith(201);
-            expect(res.json).toHaveBeenCalledWith(expect.objectContaining(newNote));
-        });
+      await NoteController.updateNote(req, res);
 
-        it('deve lidar com erro de banco de dados e retornar status 400', async () => {
-            req.body = { title: 'Nova Nota' };
-            const error = new Error('Database error');
-            NoteModel.mockImplementation(() => ({
-                save: jest.fn().mockRejectedValue(error)
-            }));
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.send).toHaveBeenCalledWith('Erro interno do servidor');
+    });
+  });
 
-            await NoteController.saveNote(req, res);
+  // Teste para o método deleteNote
+  describe('deleteNote', () => {
+    it('should delete a note', async () => {
+      NoteModel.findByIdAndDelete.mockResolvedValue({});
 
-            expect(res.status).toHaveBeenCalledWith(400);
-            expect(res.json).toHaveBeenCalledWith({ error: "Erro ao adicionar nota. Certifique-se de enviar os dados no formato correto." });
-        });
+      const req = { params: { id: 'someId' } };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+
+      await NoteController.deleteNote(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ message: 'Nota excluída com sucesso' });
     });
 
-    describe('updateNote', () => {
-        it('deve atualizar uma nota e retornar a nota atualizada', async () => {
-            req.params = { id: '1' };
-            req.body = { title: 'Nota Atualizada' };
-            const updatedNote = { _id: '1', title: 'Nota Atualizada' };
-            NoteModel.findByIdAndUpdate.mockResolvedValue(updatedNote);
+    it('should handle errors in deleteNote', async () => {
+      const errorMessage = 'Erro ao excluir nota';
+      NoteModel.findByIdAndDelete.mockRejectedValue(new Error(errorMessage));
 
-            await NoteController.updateNote(req, res);
+      const req = { params: { id: 'someId' } };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
 
-            expect(NoteModel.findByIdAndUpdate).toHaveBeenCalledWith('1', req.body, { new: true });
-            expect(res.json).toHaveBeenCalledWith(updatedNote);
-        });
+      await NoteController.deleteNote(req, res);
 
-        it('deve lidar com erro de banco de dados e retornar status 500', async () => {
-            req.params = { id: '1' };
-            req.body = { title: 'Nota Atualizada' };
-            const error = new Error('Database error');
-            NoteModel.findByIdAndUpdate.mockRejectedValue(error);
-
-            await NoteController.updateNote(req, res);
-
-            expect(NoteModel.findByIdAndUpdate).toHaveBeenCalledWith('1', req.body, { new: true });
-            expect(res.status).toHaveBeenCalledWith(500);
-            expect(res.send).toHaveBeenCalledWith('Erro interno do servidor');
-        });
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Erro interno do servidor' });
     });
+  });
 
-    describe('deleteNote', () => {
-        it('deve excluir uma nota e retornar uma mensagem de sucesso', async () => {
-            req.params = { id: '1' };
-            NoteModel.findByIdAndDelete.mockResolvedValue({});
-
-            await NoteController.deleteNote(req, res);
-
-            expect(NoteModel.findByIdAndDelete).toHaveBeenCalledWith('1');
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith({ message: 'Nota excluída com sucesso' });
-        });
-
-        it('deve lidar com erro de banco de dados e retornar status 500', async () => {
-            req.params = { id: '1' };
-            const error = new Error('Database error');
-            NoteModel.findByIdAndDelete.mockRejectedValue(error);
-
-            await NoteController.deleteNote(req, res);
-
-            expect(NoteModel.findByIdAndDelete).toHaveBeenCalledWith('1');
-            expect(res.status).toHaveBeenCalledWith(500);
-            expect(res.json).toHaveBeenCalledWith({ error: 'Erro interno do servidor' });
-        });
-    });
 });
