@@ -5,7 +5,8 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && node src/Server.js",
     "client": "cd frontend && npm start",
-    "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install && cd .."
+    "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install && cd ..",
+    "test": "cd backend && npm test"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
