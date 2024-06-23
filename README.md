@@ -44,16 +44,19 @@ justificadas
 
 ### Instalação
 1. Clone o repositório para a sua máquina:
+
    ```sh
    git clone https://github.com/guilhermedcl/to-do-list.git
    ```
 
 2. Navegue até o diretório do projeto:
+
    ```sh
    cd to-do-list
    ```
 
 3. Instale as dependências com o comando abaixo na raiz do projeto:
+
    ```sh
    npm run install-all
    ```
@@ -68,7 +71,9 @@ justificadas
 
 
 ### Rodando a Aplicação
+
 1. Inicie a aplicação com o comando abaixo na raiz do projeto:
+
    ```sh
    npm start
    ```
@@ -76,15 +81,11 @@ justificadas
 2. Seu navegador abrirá o link: [http://localhost:3000](http://localhost:3000) com a aplicação rodando.
 
 ## Como Rodar os Testes
-1. Já dentro da raiz do projeto, navegue até a pasta do backend:
-   ```sh
-   cd backend
-   ```
 
-2. Inicie os testes com o seguinte comando:
+1. Inicie os testes com o comando abaixo na raiz do projeto:
     ```sh
    npm test
    ```
 
-3. Na estrutura do projeto, abra a pasta --> backend/coverage/Icov-report/index.html nela abrirá o navegador web mostrando todo o relatório dos testes realizados, também verifique seu terminal.
+2. Na estrutura do projeto, abra a pasta --> backend/coverage/Icov-report/index.html nela abrirá o navegador web mostrando todo o relatório dos testes realizados, também verifique seu terminal.
 
