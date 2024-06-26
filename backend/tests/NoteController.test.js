@@ -1,6 +1,7 @@
 const NoteController = require('../src/controllers/NoteController');
 const NoteModel = require('../src/models/NoteModel');
 
+
 // Mock do modelo para evitar interações com o banco de dados real
 jest.mock('../src/models/NoteModel');
 
