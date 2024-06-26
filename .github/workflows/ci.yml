@@ -29,8 +29,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set up .env file
+        run: echo "MONGODB_URL=${{ secrets.MONGODB_URL }}" > .env.test
+
       - name: Run Jest
         run: npm test
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
           
   delivery:
     runs-on: ubuntu-latest
