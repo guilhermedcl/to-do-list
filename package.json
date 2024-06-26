@@ -6,12 +6,12 @@
     "server": "cd backend && node src/Server.js",
     "client": "cd frontend && npm start",
     "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install && cd ..",
-    "test": "cd backend && npm test"
+    "test": "cd backend && jest --detectOpenHandles --coverage --forceExit"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "jest": "^29.7.0",
-    "eslint": "^7.32.0"
+    "eslint": "^7.32.0",
+    "jest": "^29.7.0"
   },
   "dependencies": {
     "cors": "^2.8.5",
