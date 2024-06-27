@@ -30,7 +30,7 @@ jobs:
         run: npm run install-all
 
       - name: Set up .env file
-        run: echo "MONGODB_URL=${{ secrets.MONGODB_URL }}" > .env.test
+        run: echo "MONGODB_URL=${{ secrets.MONGODB_URL }}" > .env
 
       - name: Run Jest
         run: npm test
