@@ -53,10 +53,7 @@ jobs:
       
       - name: Merge to main
         run: |
-          git fetch origin
+          git fetch
           git checkout main
-          git pull origin main
-          git checkout develop
-          git pull origin develop
-          git merge develop --no-edit
+          git merge develop --allow-unrelated-histories --no-edit
           git push origin main
