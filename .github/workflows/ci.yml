@@ -47,7 +47,7 @@ jobs:
         run: |
           git checkout main
           git pull origin main
-          git merge develop --allow-unrelated-histories --no-ff --no-edit || echo "Merge conflicts detected, please resolve manually"
+          git merge develop --allow-unrelated-histories --strategy-option theirs --no-ff --no-edit || echo "Merge conflicts detected, please resolve manually"
         
       - name: Push changes
         if: success()
@@ -56,5 +56,5 @@ jobs:
       - name: Update develop branch
         run: |
           git checkout develop
-          git merge main --allow-unrelated-histories --no-ff --no-edit
+          git merge main --allow-unrelated-histories --strategy-option theirs --no-ff --no-edit
           git push origin develop || echo "Push to develop failed"
