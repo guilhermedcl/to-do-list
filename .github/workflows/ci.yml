@@ -56,5 +56,7 @@ jobs:
           git fetch origin
           git checkout main
           git pull origin main
-          git merge develop -s ours --allow-unrelated-histories --no-edit
+          git checkout develop
+          git pull origin develop
+          git merge develop --no-edit
           git push origin main
