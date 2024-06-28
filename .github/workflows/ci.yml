@@ -32,6 +32,9 @@ jobs:
       - name: Set up .env file
         run: echo "MONGODB_URL=${{ secrets.MONGODB_URL }}" > .env
 
+      - name: Run ESLint
+        run: npm run lint
+
       - name: Run Jest
         run: npm test
         env:
