@@ -1,6 +1,6 @@
 # To Do List App
 
-Este projeto é uma aplicação de lista de tarefas simples, desenvolvida como parte de um trabalho integrado envolvendo três disciplinas. O sistema é composto por três partes distintas, cada uma referente a uma das disciplinas envolvidas no semestre.
+Este projeto é uma aplicação de lista de tarefas simples, desenvolvida como parte de um trabalho integrado envolvendo quatro disciplinas. O sistema é composto por três partes distintas, cada uma referente a uma das disciplinas envolvidas no semestre.
 
 ## Requisitos Específicos
 
@@ -36,6 +36,17 @@ durante a execução
 - Gerar o relatório de cobertura de testes com Jest
 - Implementar 100% de cobertura de testes unitários - partes de código sem teste deverão ser
 justificadas
+
+
+### DevOps
+
+- Criar um repositório que contenha:
+- Branch develop
+- 1 Workflow que faça Continuous Integration e Continuous Delivery
+- Deverá rodar analise de código estático, cobertura e os testes de unidade
+- 1 Workflow que faça Continuous Deployment em uma instância do EC2
+- Construir uma aplicação Node.js que será gerenciada pelo repositório
+- Aplicação deve conter alguns testes de unidade
 
 ## Tecnologias Utilizadas
 <img src="https://skillicons.dev/icons?i=html,css,javascript,nodejs,express,jest,mongodb,git,npm,postman,vscode" /><br>
